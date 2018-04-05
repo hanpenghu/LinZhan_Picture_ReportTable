@@ -1,0 +1,608 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.winwin.picreport.Ddao.reportxmlmapper.MfIcZMapper">
+  <resultMap id="BaseResultMap" type="com.winwin.picreport.Edto.MfIcZ">
+    <id column="IC_ID" jdbcType="VARCHAR" property="icId" />
+    <id column="IC_NO" jdbcType="VARCHAR" property="icNo" />
+    <result column="AMTN_JS" jdbcType="NUMERIC" property="amtnJs" />
+    <result column="AMTN_TJ" jdbcType="NUMERIC" property="amtnTj" />
+    <result column="AMTN_YF" jdbcType="NUMERIC" property="amtnYf" />
+    <result column="AREA" jdbcType="VARCHAR" property="area" />
+    <result column="GYSBM" jdbcType="VARCHAR" property="gysbm" />
+    <result column="JHR" jdbcType="VARCHAR" property="jhr" />
+    <result column="MODE" jdbcType="VARCHAR" property="mode" />
+    <result column="PPS" jdbcType="VARCHAR" property="pps" />
+    <result column="QTY_JS" jdbcType="VARCHAR" property="qtyJs" />
+    <result column="UP_TJ1" jdbcType="NUMERIC" property="upTj1" />
+    <result column="UP1" jdbcType="NUMERIC" property="up1" />
+    <result column="UP2" jdbcType="NUMERIC" property="up2" />
+    <result column="WLGS" jdbcType="VARCHAR" property="wlgs" />
+    <result column="NAME" jdbcType="VARCHAR" property="name" />
+    <result column="MQTY_XS" jdbcType="NUMERIC" property="mqtyXs" />
+    <result column="ZF" jdbcType="VARCHAR" property="zf" />
+    <result column="JKSY" jdbcType="VARCHAR" property="jksy" />
+    <result column="JKSC" jdbcType="VARCHAR" property="jksc" />
+    <result column="FILE__PSPZ1" jdbcType="VARCHAR" property="filePspz1" />
+    <result column="PFILE_PSPZ" jdbcType="VARCHAR" property="pfilePspz" />
+    <result column="SHQRPZ" jdbcType="VARCHAR" property="shqrpz" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.winwin.picreport.Edto.MfIcZWithBLOBs">
+    <result column="PSPZ" jdbcType="LONGVARBINARY" property="pspz" />
+    <result column="PSPZ1" jdbcType="LONGVARBINARY" property="pspz1" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    IC_ID, IC_NO, AMTN_JS, AMTN_TJ, AMTN_YF, AREA, GYSBM, JHR, MODE, PPS, QTY_JS, UP_TJ1, 
+    UP1, UP2, WLGS, NAME, MQTY_XS, ZF, JKSY, JKSC, FILE__PSPZ1, PFILE_PSPZ, SHQRPZ
+  </sql>
+  <sql id="Blob_Column_List">
+    PSPZ, PSPZ1
+  </sql>
+  <select id="selectByExampleWithBLOBs" parameterType="com.winwin.picreport.Edto.MfIcZExample" resultMap="ResultMapWithBLOBs">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from MF_IC_Z
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" parameterType="com.winwin.picreport.Edto.MfIcZExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from MF_IC_Z
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="com.winwin.picreport.Edto.MfIcZKey" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from MF_IC_Z
+    where IC_ID = #{icId,jdbcType=VARCHAR}
+      and IC_NO = #{icNo,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="com.winwin.picreport.Edto.MfIcZKey">
+    delete from MF_IC_Z
+    where IC_ID = #{icId,jdbcType=VARCHAR}
+      and IC_NO = #{icNo,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.winwin.picreport.Edto.MfIcZExample">
+    delete from MF_IC_Z
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.winwin.picreport.Edto.MfIcZWithBLOBs">
+    insert into MF_IC_Z (IC_ID, IC_NO, AMTN_JS, 
+      AMTN_TJ, AMTN_YF, AREA, 
+      GYSBM, JHR, MODE, PPS, 
+      QTY_JS, UP_TJ1, UP1, 
+      UP2, WLGS, NAME, MQTY_XS, 
+      ZF, JKSY, JKSC, FILE__PSPZ1, 
+      PFILE_PSPZ, SHQRPZ, PSPZ, 
+      PSPZ1)
+    values (#{icId,jdbcType=VARCHAR}, #{icNo,jdbcType=VARCHAR}, #{amtnJs,jdbcType=NUMERIC}, 
+      #{amtnTj,jdbcType=NUMERIC}, #{amtnYf,jdbcType=NUMERIC}, #{area,jdbcType=VARCHAR}, 
+      #{gysbm,jdbcType=VARCHAR}, #{jhr,jdbcType=VARCHAR}, #{mode,jdbcType=VARCHAR}, #{pps,jdbcType=VARCHAR}, 
+      #{qtyJs,jdbcType=VARCHAR}, #{upTj1,jdbcType=NUMERIC}, #{up1,jdbcType=NUMERIC}, 
+      #{up2,jdbcType=NUMERIC}, #{wlgs,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{mqtyXs,jdbcType=NUMERIC}, 
+      #{zf,jdbcType=VARCHAR}, #{jksy,jdbcType=VARCHAR}, #{jksc,jdbcType=VARCHAR}, #{filePspz1,jdbcType=VARCHAR}, 
+      #{pfilePspz,jdbcType=VARCHAR}, #{shqrpz,jdbcType=VARCHAR}, #{pspz,jdbcType=LONGVARBINARY}, 
+      #{pspz1,jdbcType=LONGVARBINARY})
+  </insert>
+  <insert id="insertSelective" parameterType="com.winwin.picreport.Edto.MfIcZWithBLOBs">
+    insert into MF_IC_Z
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="icId != null">
+        IC_ID,
+      </if>
+      <if test="icNo != null">
+        IC_NO,
+      </if>
+      <if test="amtnJs != null">
+        AMTN_JS,
+      </if>
+      <if test="amtnTj != null">
+        AMTN_TJ,
+      </if>
+      <if test="amtnYf != null">
+        AMTN_YF,
+      </if>
+      <if test="area != null">
+        AREA,
+      </if>
+      <if test="gysbm != null">
+        GYSBM,
+      </if>
+      <if test="jhr != null">
+        JHR,
+      </if>
+      <if test="mode != null">
+        MODE,
+      </if>
+      <if test="pps != null">
+        PPS,
+      </if>
+      <if test="qtyJs != null">
+        QTY_JS,
+      </if>
+      <if test="upTj1 != null">
+        UP_TJ1,
+      </if>
+      <if test="up1 != null">
+        UP1,
+      </if>
+      <if test="up2 != null">
+        UP2,
+      </if>
+      <if test="wlgs != null">
+        WLGS,
+      </if>
+      <if test="name != null">
+        NAME,
+      </if>
+      <if test="mqtyXs != null">
+        MQTY_XS,
+      </if>
+      <if test="zf != null">
+        ZF,
+      </if>
+      <if test="jksy != null">
+        JKSY,
+      </if>
+      <if test="jksc != null">
+        JKSC,
+      </if>
+      <if test="filePspz1 != null">
+        FILE__PSPZ1,
+      </if>
+      <if test="pfilePspz != null">
+        PFILE_PSPZ,
+      </if>
+      <if test="shqrpz != null">
+        SHQRPZ,
+      </if>
+      <if test="pspz != null">
+        PSPZ,
+      </if>
+      <if test="pspz1 != null">
+        PSPZ1,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="icId != null">
+        #{icId,jdbcType=VARCHAR},
+      </if>
+      <if test="icNo != null">
+        #{icNo,jdbcType=VARCHAR},
+      </if>
+      <if test="amtnJs != null">
+        #{amtnJs,jdbcType=NUMERIC},
+      </if>
+      <if test="amtnTj != null">
+        #{amtnTj,jdbcType=NUMERIC},
+      </if>
+      <if test="amtnYf != null">
+        #{amtnYf,jdbcType=NUMERIC},
+      </if>
+      <if test="area != null">
+        #{area,jdbcType=VARCHAR},
+      </if>
+      <if test="gysbm != null">
+        #{gysbm,jdbcType=VARCHAR},
+      </if>
+      <if test="jhr != null">
+        #{jhr,jdbcType=VARCHAR},
+      </if>
+      <if test="mode != null">
+        #{mode,jdbcType=VARCHAR},
+      </if>
+      <if test="pps != null">
+        #{pps,jdbcType=VARCHAR},
+      </if>
+      <if test="qtyJs != null">
+        #{qtyJs,jdbcType=VARCHAR},
+      </if>
+      <if test="upTj1 != null">
+        #{upTj1,jdbcType=NUMERIC},
+      </if>
+      <if test="up1 != null">
+        #{up1,jdbcType=NUMERIC},
+      </if>
+      <if test="up2 != null">
+        #{up2,jdbcType=NUMERIC},
+      </if>
+      <if test="wlgs != null">
+        #{wlgs,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="mqtyXs != null">
+        #{mqtyXs,jdbcType=NUMERIC},
+      </if>
+      <if test="zf != null">
+        #{zf,jdbcType=VARCHAR},
+      </if>
+      <if test="jksy != null">
+        #{jksy,jdbcType=VARCHAR},
+      </if>
+      <if test="jksc != null">
+        #{jksc,jdbcType=VARCHAR},
+      </if>
+      <if test="filePspz1 != null">
+        #{filePspz1,jdbcType=VARCHAR},
+      </if>
+      <if test="pfilePspz != null">
+        #{pfilePspz,jdbcType=VARCHAR},
+      </if>
+      <if test="shqrpz != null">
+        #{shqrpz,jdbcType=VARCHAR},
+      </if>
+      <if test="pspz != null">
+        #{pspz,jdbcType=LONGVARBINARY},
+      </if>
+      <if test="pspz1 != null">
+        #{pspz1,jdbcType=LONGVARBINARY},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.winwin.picreport.Edto.MfIcZExample" resultType="java.lang.Long">
+    select count(*) from MF_IC_Z
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update MF_IC_Z
+    <set>
+      <if test="record.icId != null">
+        IC_ID = #{record.icId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.icNo != null">
+        IC_NO = #{record.icNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.amtnJs != null">
+        AMTN_JS = #{record.amtnJs,jdbcType=NUMERIC},
+      </if>
+      <if test="record.amtnTj != null">
+        AMTN_TJ = #{record.amtnTj,jdbcType=NUMERIC},
+      </if>
+      <if test="record.amtnYf != null">
+        AMTN_YF = #{record.amtnYf,jdbcType=NUMERIC},
+      </if>
+      <if test="record.area != null">
+        AREA = #{record.area,jdbcType=VARCHAR},
+      </if>
+      <if test="record.gysbm != null">
+        GYSBM = #{record.gysbm,jdbcType=VARCHAR},
+      </if>
+      <if test="record.jhr != null">
+        JHR = #{record.jhr,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mode != null">
+        MODE = #{record.mode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.pps != null">
+        PPS = #{record.pps,jdbcType=VARCHAR},
+      </if>
+      <if test="record.qtyJs != null">
+        QTY_JS = #{record.qtyJs,jdbcType=VARCHAR},
+      </if>
+      <if test="record.upTj1 != null">
+        UP_TJ1 = #{record.upTj1,jdbcType=NUMERIC},
+      </if>
+      <if test="record.up1 != null">
+        UP1 = #{record.up1,jdbcType=NUMERIC},
+      </if>
+      <if test="record.up2 != null">
+        UP2 = #{record.up2,jdbcType=NUMERIC},
+      </if>
+      <if test="record.wlgs != null">
+        WLGS = #{record.wlgs,jdbcType=VARCHAR},
+      </if>
+      <if test="record.name != null">
+        NAME = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mqtyXs != null">
+        MQTY_XS = #{record.mqtyXs,jdbcType=NUMERIC},
+      </if>
+      <if test="record.zf != null">
+        ZF = #{record.zf,jdbcType=VARCHAR},
+      </if>
+      <if test="record.jksy != null">
+        JKSY = #{record.jksy,jdbcType=VARCHAR},
+      </if>
+      <if test="record.jksc != null">
+        JKSC = #{record.jksc,jdbcType=VARCHAR},
+      </if>
+      <if test="record.filePspz1 != null">
+        FILE__PSPZ1 = #{record.filePspz1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.pfilePspz != null">
+        PFILE_PSPZ = #{record.pfilePspz,jdbcType=VARCHAR},
+      </if>
+      <if test="record.shqrpz != null">
+        SHQRPZ = #{record.shqrpz,jdbcType=VARCHAR},
+      </if>
+      <if test="record.shqrpz == null">
+        SHQRPZ = SHQRPZ,
+      </if>
+      <if test="record.pspz != null">
+        PSPZ = #{record.pspz,jdbcType=LONGVARBINARY},
+      </if>
+      <if test="record.pspz1 != null">
+        PSPZ1 = #{record.pspz1,jdbcType=LONGVARBINARY},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map">
+    update MF_IC_Z
+    set IC_ID = #{record.icId,jdbcType=VARCHAR},
+      IC_NO = #{record.icNo,jdbcType=VARCHAR},
+      AMTN_JS = #{record.amtnJs,jdbcType=NUMERIC},
+      AMTN_TJ = #{record.amtnTj,jdbcType=NUMERIC},
+      AMTN_YF = #{record.amtnYf,jdbcType=NUMERIC},
+      AREA = #{record.area,jdbcType=VARCHAR},
+      GYSBM = #{record.gysbm,jdbcType=VARCHAR},
+      JHR = #{record.jhr,jdbcType=VARCHAR},
+      MODE = #{record.mode,jdbcType=VARCHAR},
+      PPS = #{record.pps,jdbcType=VARCHAR},
+      QTY_JS = #{record.qtyJs,jdbcType=VARCHAR},
+      UP_TJ1 = #{record.upTj1,jdbcType=NUMERIC},
+      UP1 = #{record.up1,jdbcType=NUMERIC},
+      UP2 = #{record.up2,jdbcType=NUMERIC},
+      WLGS = #{record.wlgs,jdbcType=VARCHAR},
+      NAME = #{record.name,jdbcType=VARCHAR},
+      MQTY_XS = #{record.mqtyXs,jdbcType=NUMERIC},
+      ZF = #{record.zf,jdbcType=VARCHAR},
+      JKSY = #{record.jksy,jdbcType=VARCHAR},
+      JKSC = #{record.jksc,jdbcType=VARCHAR},
+      FILE__PSPZ1 = #{record.filePspz1,jdbcType=VARCHAR},
+      PFILE_PSPZ = #{record.pfilePspz,jdbcType=VARCHAR},
+      SHQRPZ = #{record.shqrpz,jdbcType=VARCHAR},
+      PSPZ = #{record.pspz,jdbcType=LONGVARBINARY},
+      PSPZ1 = #{record.pspz1,jdbcType=LONGVARBINARY}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update MF_IC_Z
+    set IC_ID = #{record.icId,jdbcType=VARCHAR},
+      IC_NO = #{record.icNo,jdbcType=VARCHAR},
+      AMTN_JS = #{record.amtnJs,jdbcType=NUMERIC},
+      AMTN_TJ = #{record.amtnTj,jdbcType=NUMERIC},
+      AMTN_YF = #{record.amtnYf,jdbcType=NUMERIC},
+      AREA = #{record.area,jdbcType=VARCHAR},
+      GYSBM = #{record.gysbm,jdbcType=VARCHAR},
+      JHR = #{record.jhr,jdbcType=VARCHAR},
+      MODE = #{record.mode,jdbcType=VARCHAR},
+      PPS = #{record.pps,jdbcType=VARCHAR},
+      QTY_JS = #{record.qtyJs,jdbcType=VARCHAR},
+      UP_TJ1 = #{record.upTj1,jdbcType=NUMERIC},
+      UP1 = #{record.up1,jdbcType=NUMERIC},
+      UP2 = #{record.up2,jdbcType=NUMERIC},
+      WLGS = #{record.wlgs,jdbcType=VARCHAR},
+      NAME = #{record.name,jdbcType=VARCHAR},
+      MQTY_XS = #{record.mqtyXs,jdbcType=NUMERIC},
+      ZF = #{record.zf,jdbcType=VARCHAR},
+      JKSY = #{record.jksy,jdbcType=VARCHAR},
+      JKSC = #{record.jksc,jdbcType=VARCHAR},
+      FILE__PSPZ1 = #{record.filePspz1,jdbcType=VARCHAR},
+      PFILE_PSPZ = #{record.pfilePspz,jdbcType=VARCHAR},
+      SHQRPZ = #{record.shqrpz,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.winwin.picreport.Edto.MfIcZWithBLOBs">
+    update MF_IC_Z
+    <set>
+      <if test="amtnJs != null">
+        AMTN_JS = #{amtnJs,jdbcType=NUMERIC},
+      </if>
+      <if test="amtnTj != null">
+        AMTN_TJ = #{amtnTj,jdbcType=NUMERIC},
+      </if>
+      <if test="amtnYf != null">
+        AMTN_YF = #{amtnYf,jdbcType=NUMERIC},
+      </if>
+      <if test="area != null">
+        AREA = #{area,jdbcType=VARCHAR},
+      </if>
+      <if test="gysbm != null">
+        GYSBM = #{gysbm,jdbcType=VARCHAR},
+      </if>
+      <if test="jhr != null">
+        JHR = #{jhr,jdbcType=VARCHAR},
+      </if>
+      <if test="mode != null">
+        MODE = #{mode,jdbcType=VARCHAR},
+      </if>
+      <if test="pps != null">
+        PPS = #{pps,jdbcType=VARCHAR},
+      </if>
+      <if test="qtyJs != null">
+        QTY_JS = #{qtyJs,jdbcType=VARCHAR},
+      </if>
+      <if test="upTj1 != null">
+        UP_TJ1 = #{upTj1,jdbcType=NUMERIC},
+      </if>
+      <if test="up1 != null">
+        UP1 = #{up1,jdbcType=NUMERIC},
+      </if>
+      <if test="up2 != null">
+        UP2 = #{up2,jdbcType=NUMERIC},
+      </if>
+      <if test="wlgs != null">
+        WLGS = #{wlgs,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        NAME = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="mqtyXs != null">
+        MQTY_XS = #{mqtyXs,jdbcType=NUMERIC},
+      </if>
+      <if test="zf != null">
+        ZF = #{zf,jdbcType=VARCHAR},
+      </if>
+      <if test="jksy != null">
+        JKSY = #{jksy,jdbcType=VARCHAR},
+      </if>
+      <if test="jksc != null">
+        JKSC = #{jksc,jdbcType=VARCHAR},
+      </if>
+      <if test="filePspz1 != null">
+        FILE__PSPZ1 = #{filePspz1,jdbcType=VARCHAR},
+      </if>
+      <if test="pfilePspz != null">
+        PFILE_PSPZ = #{pfilePspz,jdbcType=VARCHAR},
+      </if>
+      <if test="shqrpz != null">
+        SHQRPZ = #{shqrpz,jdbcType=VARCHAR},
+      </if>
+      <if test="shqrpz == null">
+        SHQRPZ = SHQRPZ,
+      </if>
+      <if test="pspz != null">
+        PSPZ = #{pspz,jdbcType=LONGVARBINARY},
+      </if>
+      <if test="pspz1 != null">
+        PSPZ1 = #{pspz1,jdbcType=LONGVARBINARY},
+      </if>
+    </set>
+    where IC_ID = #{icId,jdbcType=VARCHAR}
+      and IC_NO = #{icNo,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.winwin.picreport.Edto.MfIcZWithBLOBs">
+    update MF_IC_Z
+    set AMTN_JS = #{amtnJs,jdbcType=NUMERIC},
+      AMTN_TJ = #{amtnTj,jdbcType=NUMERIC},
+      AMTN_YF = #{amtnYf,jdbcType=NUMERIC},
+      AREA = #{area,jdbcType=VARCHAR},
+      GYSBM = #{gysbm,jdbcType=VARCHAR},
+      JHR = #{jhr,jdbcType=VARCHAR},
+      MODE = #{mode,jdbcType=VARCHAR},
+      PPS = #{pps,jdbcType=VARCHAR},
+      QTY_JS = #{qtyJs,jdbcType=VARCHAR},
+      UP_TJ1 = #{upTj1,jdbcType=NUMERIC},
+      UP1 = #{up1,jdbcType=NUMERIC},
+      UP2 = #{up2,jdbcType=NUMERIC},
+      WLGS = #{wlgs,jdbcType=VARCHAR},
+      NAME = #{name,jdbcType=VARCHAR},
+      MQTY_XS = #{mqtyXs,jdbcType=NUMERIC},
+      ZF = #{zf,jdbcType=VARCHAR},
+      JKSY = #{jksy,jdbcType=VARCHAR},
+      JKSC = #{jksc,jdbcType=VARCHAR},
+      FILE__PSPZ1 = #{filePspz1,jdbcType=VARCHAR},
+      PFILE_PSPZ = #{pfilePspz,jdbcType=VARCHAR},
+      SHQRPZ = #{shqrpz,jdbcType=VARCHAR},
+      PSPZ = #{pspz,jdbcType=LONGVARBINARY},
+      PSPZ1 = #{pspz1,jdbcType=LONGVARBINARY}
+    where IC_ID = #{icId,jdbcType=VARCHAR}
+      and IC_NO = #{icNo,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.winwin.picreport.Edto.MfIcZ">
+    update MF_IC_Z
+    set AMTN_JS = #{amtnJs,jdbcType=NUMERIC},
+      AMTN_TJ = #{amtnTj,jdbcType=NUMERIC},
+      AMTN_YF = #{amtnYf,jdbcType=NUMERIC},
+      AREA = #{area,jdbcType=VARCHAR},
+      GYSBM = #{gysbm,jdbcType=VARCHAR},
+      JHR = #{jhr,jdbcType=VARCHAR},
+      MODE = #{mode,jdbcType=VARCHAR},
+      PPS = #{pps,jdbcType=VARCHAR},
+      QTY_JS = #{qtyJs,jdbcType=VARCHAR},
+      UP_TJ1 = #{upTj1,jdbcType=NUMERIC},
+      UP1 = #{up1,jdbcType=NUMERIC},
+      UP2 = #{up2,jdbcType=NUMERIC},
+      WLGS = #{wlgs,jdbcType=VARCHAR},
+      NAME = #{name,jdbcType=VARCHAR},
+      MQTY_XS = #{mqtyXs,jdbcType=NUMERIC},
+      ZF = #{zf,jdbcType=VARCHAR},
+      JKSY = #{jksy,jdbcType=VARCHAR},
+      JKSC = #{jksc,jdbcType=VARCHAR},
+      FILE__PSPZ1 = #{filePspz1,jdbcType=VARCHAR},
+      PFILE_PSPZ = #{pfilePspz,jdbcType=VARCHAR},
+      SHQRPZ = #{shqrpz,jdbcType=VARCHAR}
+    where IC_ID = #{icId,jdbcType=VARCHAR}
+      and IC_NO = #{icNo,jdbcType=VARCHAR}
+  </update>
+</mapper>

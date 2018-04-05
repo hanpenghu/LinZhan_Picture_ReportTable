@@ -1,10 +1,24 @@
 package com.winwin.picreport.Edto;
 
-import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 public class Data {
-    private List<String> unitList;
+
+
+
+    private List list=new LinkedList();
+
+    public List getList() {
+        return list;
+    }
+
+    public Data setList(List list) {
+        this.list = list;
+        return this;
+    }
+
+    /*private List<String> unitList;
     public static Data gD(){
         return new Data();
     }
@@ -36,5 +50,5 @@ public class Data {
     public Data setObjs(List<Object> objs) {
         this.objs = objs;
         return this;
-    }
+    }*/
 }

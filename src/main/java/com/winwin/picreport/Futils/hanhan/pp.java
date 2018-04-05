@@ -1,6 +1,8 @@
 package com.winwin.picreport.Futils.hanhan;
 
 
+import org.apache.commons.codec.digest.DigestUtils;
+
 import java.util.Arrays;
 import java.util.List;
 
@@ -19,6 +21,13 @@ public class pp {
     }
 
 
+    /**
+     *封装apahce包的sha1加密
+     * */
+    public static String sha1(String s){
+
+        return DigestUtils.shaHex(s);
+    }
 
 
 

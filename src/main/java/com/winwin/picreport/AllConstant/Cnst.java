@@ -1,9 +1,13 @@
 package com.winwin.picreport.AllConstant;
-import com.winwin.picreport.Acomponent.GetPriceModelUpdef;
-import com.winwin.picreport.Acomponent.SapsoChongfu;
-import com.winwin.picreport.Bcontroller.xiaoShouDingDanDaoRuDaoChuExcel.servicesBatchRefactor.OrderToErp.CommonDaoRuDBZhiQianZhengLi;
-import com.winwin.picreport.Bcontroller.xiaoShouDingDanDaoRuDaoChuExcel.servicesBatchRefactor.OrderToErp.CommonOrderBatchToDb;
-import com.winwin.picreport.Cservice.*;
+//import com.winwin.picreport.Acomponent.GetPriceModelUpdef;
+//import com.winwin.picreport.Acomponent.SapsoChongfu;
+//import com.winwin.picreport.Bcontroller.xiaoShouDingDanDaoRuDaoChuExcel.servicesBatchRefactor.OrderToErp.CommonDaoRuDBZhiQianZhengLi;
+//import com.winwin.picreport.Bcontroller.xiaoShouDingDanDaoRuDaoChuExcel.servicesBatchRefactor.OrderToErp.CommonOrderBatchToDb;
+//import com.winwin.picreport.Cservice.*;
+import com.winwin.picreport.Bcontroller.DeDao_Js_DiaoYong_sheXiangTou_De_CanShu.SignParamGet;
+import com.winwin.picreport.Bcontroller.access_token.Access_token;
+import com.winwin.picreport.Bcontroller.jsAPI_ticket.JsTicket;
+import com.winwin.picreport.Bcontroller.sheZhiCaiDan1.SheZhiCaiDan;
 import com.winwin.picreport.Ddao.reportxmlmapper.*;
 import com.winwin.picreport.Futils.GeneratePrdNo.GPrdNo;
 import com.winwin.picreport.Futils.GeneratePrdNo.GetMaxPrdNo;
@@ -12,11 +16,14 @@ import com.winwin.picreport.Futils.hanhan.p;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.annotation.Order;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.Date;
 
-@Order(2)
+@Order(0)
 @Component("cnst")
 public class Cnst {
     public static final String SamplesSys="SamplesSys";//产品打样的时候我们插入系统表prdt和up_def(定价)的时候做的标记,该标记证明了是打样系统产生的记录
@@ -61,6 +68,44 @@ public class Cnst {
     public static final String curIdBefore="curIdBefore";
 
 
+    /**
+     *创建云蕊存放图片的根目录
+     *pic
+     * 我在资源文件中已经将pic内部设置为静态资源path,可以直接127.0.0.1:80/1.png 访问资源1.png
+     * 每10秒钟检查一次,如果文件夹不存在,就创建一个pic文件夹
+     * */
+    @Scheduled(initialDelay = 3*1000,fixedDelay = 10*1000)
+    public  void picDirCreate(){
+            File file=new File("pic");
+            if(file.exists()){
+                //存在就不管
+            }else{
+                //不存在就创建一个
+                file.mkdir();
+            }
+    }
+
+
+    /**
+     *每3秒检查一次生成菜单的的文件是否存在,不存在就创建一个
+     * */
+    @Scheduled(initialDelay = 3*1000,fixedDelay = 10*1000)
+    public  void menuCreate(){
+        File file=new File(C.menu);
+        if(file.exists()){
+            //存在就不管
+        }else{
+            //不存在就创建一个
+            try {
+                file.createNewFile();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+
+
 
     public static String getProjectPath(){
         String jarPath = SpringbootJarPath.JarLuJingGet();
@@ -75,8 +120,22 @@ public class Cnst {
     }
 
 
+    @Autowired
+    public SheZhiCaiDan sheZhiCaiDan;
 
+    @Autowired
+    public SignParamGet signParamGet;
 
+    @Autowired
+    public C c;
+
+    @Autowired
+    public JsTicket jsTicket;
+    @Autowired
+    public Access_token access_token;
+
+    @Autowired
+    public MfIcZMapper mfIcZMapper;
     @Autowired
     public IndxMapper indxMapper;
 
@@ -91,11 +150,6 @@ public class Cnst {
 
 
     @Autowired
-    public CommonOrderBatchToDb commonOrderBatchToDb;
-
-    @Autowired
-    public CommonDaoRuDBZhiQianZhengLi commonDaoRuDBZhiQianZhengLi;
-    @Autowired
      public  AlterPriceRecMapper alterPriceRecMapper;
     @Autowired
     public GPrdNo gPrdNo;
@@ -108,14 +162,12 @@ public class Cnst {
     @Autowired
     public GetMaxPrdNo getMaxPrdNo;
 
-    @Autowired
-    public GetPriceModelUpdef getPriceModelUpdef;
+//    @Autowired
+//    public GetPriceModelUpdef getPriceModelUpdef;
 
-    @Autowired
-    public D3SaleOrderUpLoadFromExcelService d3SaleOrderUpLoadFromExcelService;
 
-    @Autowired
-    public A1ReportRestService a1;
+
+
     @Autowired
     public MfPosMapper mfPosMapper;
 
@@ -128,29 +180,17 @@ public class Cnst {
     @Autowired
     public A001TongYongMapper a001TongYongMapper;
 
-    @Autowired
-    public SaveSaleOrBuyPrice saveSaleOrBuyPrice;
+
 
     public Date getDbDate(){
         return a001TongYongMapper.selectDbDate();
     }
 
     @Autowired
-    public Z100TestPageBeanService zt;
-    @Autowired
-    public  D1DaYangServiceDataSaveByExcel d1DaYangServiceDataSaveByExcel;
-    @Autowired
     public PrdtSampMapper prdtSampMapper;
     @Autowired
     public PrdtMapper prdtMapper;
-    @Autowired
-    public D1DaYangService_ImageUpLoadAndDataSave001_InfoEdit infoEdit;
 
-    @Autowired
-    public D1DaYangService_ConfirmOrder dco;
-
-    @Autowired
-    public InfoEdit_ManyAttach infoEditOfManyAttach;
 
     @Value("${tokenShiXiaoShiJian_haoMiao}")
     public String tokenShiXiaoShiJian_haoMiao;
@@ -158,8 +198,6 @@ public class Cnst {
     @Value("${excelDaoRuDaYangPicLinShiMulu}")
     public String excelDaoRuDaYangPicLinShiMulu;
 
-    @Autowired
-    public D1DaYangService d1DaYangService;
 
     @Value(Cnst.dirUrlStr)
     public String dirUrl;
@@ -181,27 +219,16 @@ public class Cnst {
     public String daYangSuoLueTuAndFuJianZongPath;
 
 
-    @Autowired
-    public SapsoChongfu sapsoChongfu;
+//    @Autowired
+//    public SapsoChongfu sapsoChongfu;
 
-    @Autowired
-    public D1DaYangS fenLei;
+
     @Autowired
     public ManyTabSerch manyTabSerch;
 
 
     //    @Autowired
 //    public PrdtSampMapper prdtSampMapper;
-    @Autowired
-    public D1DaYangServiceOfDeleteSome deleteSome;
-
-
-    @Autowired
-    public DingJiaXiuGaiService dingJiaXiuGaiService;
-
-
-    @Autowired
-    public D1DaYangServiceOfDeleteOneImg deleteOneImg;
 
     /**
      *下面是mybatis分页插件要用的东西

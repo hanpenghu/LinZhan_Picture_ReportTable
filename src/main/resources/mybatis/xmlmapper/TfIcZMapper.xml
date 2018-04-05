@@ -1,0 +1,280 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.winwin.picreport.Ddao.reportxmlmapper.TfIcZMapper">
+  <resultMap id="BaseResultMap" type="com.winwin.picreport.Edto.TfIcZ">
+    <id column="IC_ID" jdbcType="VARCHAR" property="icId" />
+    <id column="IC_NO" jdbcType="VARCHAR" property="icNo" />
+    <id column="ITM" jdbcType="INTEGER" property="itm" />
+    <result column="QTY_XS" jdbcType="NUMERIC" property="qtyXs" />
+    <result column="UP_TJ" jdbcType="NUMERIC" property="upTj" />
+    <result column="UP_TJ2" jdbcType="NUMERIC" property="upTj2" />
+    <result column="WQTY" jdbcType="NUMERIC" property="wqty" />
+    <result column="CQTY" jdbcType="NUMERIC" property="cqty" />
+    <result column="YQTY" jdbcType="NUMERIC" property="yqty" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    IC_ID, IC_NO, ITM, QTY_XS, UP_TJ, UP_TJ2, WQTY, CQTY, YQTY
+  </sql>
+  <select id="selectByExample" parameterType="com.winwin.picreport.Edto.TfIcZExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from TF_IC_Z
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="com.winwin.picreport.Edto.TfIcZKey" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from TF_IC_Z
+    where IC_ID = #{icId,jdbcType=VARCHAR}
+      and IC_NO = #{icNo,jdbcType=VARCHAR}
+      and ITM = #{itm,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="com.winwin.picreport.Edto.TfIcZKey">
+    delete from TF_IC_Z
+    where IC_ID = #{icId,jdbcType=VARCHAR}
+      and IC_NO = #{icNo,jdbcType=VARCHAR}
+      and ITM = #{itm,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.winwin.picreport.Edto.TfIcZExample">
+    delete from TF_IC_Z
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.winwin.picreport.Edto.TfIcZ">
+    insert into TF_IC_Z (IC_ID, IC_NO, ITM, 
+      QTY_XS, UP_TJ, UP_TJ2, 
+      WQTY, CQTY, YQTY)
+    values (#{icId,jdbcType=VARCHAR}, #{icNo,jdbcType=VARCHAR}, #{itm,jdbcType=INTEGER}, 
+      #{qtyXs,jdbcType=NUMERIC}, #{upTj,jdbcType=NUMERIC}, #{upTj2,jdbcType=NUMERIC}, 
+      #{wqty,jdbcType=NUMERIC}, #{cqty,jdbcType=NUMERIC}, #{yqty,jdbcType=NUMERIC})
+  </insert>
+  <insert id="insertSelective" parameterType="com.winwin.picreport.Edto.TfIcZ">
+    insert into TF_IC_Z
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="icId != null">
+        IC_ID,
+      </if>
+      <if test="icNo != null">
+        IC_NO,
+      </if>
+      <if test="itm != null">
+        ITM,
+      </if>
+      <if test="qtyXs != null">
+        QTY_XS,
+      </if>
+      <if test="upTj != null">
+        UP_TJ,
+      </if>
+      <if test="upTj2 != null">
+        UP_TJ2,
+      </if>
+      <if test="wqty != null">
+        WQTY,
+      </if>
+      <if test="cqty != null">
+        CQTY,
+      </if>
+      <if test="yqty != null">
+        YQTY,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="icId != null">
+        #{icId,jdbcType=VARCHAR},
+      </if>
+      <if test="icNo != null">
+        #{icNo,jdbcType=VARCHAR},
+      </if>
+      <if test="itm != null">
+        #{itm,jdbcType=INTEGER},
+      </if>
+      <if test="qtyXs != null">
+        #{qtyXs,jdbcType=NUMERIC},
+      </if>
+      <if test="upTj != null">
+        #{upTj,jdbcType=NUMERIC},
+      </if>
+      <if test="upTj2 != null">
+        #{upTj2,jdbcType=NUMERIC},
+      </if>
+      <if test="wqty != null">
+        #{wqty,jdbcType=NUMERIC},
+      </if>
+      <if test="cqty != null">
+        #{cqty,jdbcType=NUMERIC},
+      </if>
+      <if test="yqty != null">
+        #{yqty,jdbcType=NUMERIC},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.winwin.picreport.Edto.TfIcZExample" resultType="java.lang.Long">
+    select count(*) from TF_IC_Z
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update TF_IC_Z
+    <set>
+      <if test="record.icId != null">
+        IC_ID = #{record.icId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.icNo != null">
+        IC_NO = #{record.icNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.itm != null">
+        ITM = #{record.itm,jdbcType=INTEGER},
+      </if>
+      <if test="record.qtyXs != null">
+        QTY_XS = #{record.qtyXs,jdbcType=NUMERIC},
+      </if>
+      <if test="record.upTj != null">
+        UP_TJ = #{record.upTj,jdbcType=NUMERIC},
+      </if>
+      <if test="record.upTj2 != null">
+        UP_TJ2 = #{record.upTj2,jdbcType=NUMERIC},
+      </if>
+      <if test="record.wqty != null">
+        WQTY = #{record.wqty,jdbcType=NUMERIC},
+      </if>
+      <if test="record.cqty != null">
+        CQTY = #{record.cqty,jdbcType=NUMERIC},
+      </if>
+      <if test="record.yqty != null">
+        YQTY = #{record.yqty,jdbcType=NUMERIC},
+      </if>
+      <if test="record.yqty == null">
+        YQTY = YQTY,
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update TF_IC_Z
+    set IC_ID = #{record.icId,jdbcType=VARCHAR},
+      IC_NO = #{record.icNo,jdbcType=VARCHAR},
+      ITM = #{record.itm,jdbcType=INTEGER},
+      QTY_XS = #{record.qtyXs,jdbcType=NUMERIC},
+      UP_TJ = #{record.upTj,jdbcType=NUMERIC},
+      UP_TJ2 = #{record.upTj2,jdbcType=NUMERIC},
+      WQTY = #{record.wqty,jdbcType=NUMERIC},
+      CQTY = #{record.cqty,jdbcType=NUMERIC},
+      YQTY = #{record.yqty,jdbcType=NUMERIC}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.winwin.picreport.Edto.TfIcZ">
+    update TF_IC_Z
+    <set>
+      <if test="qtyXs != null">
+        QTY_XS = #{qtyXs,jdbcType=NUMERIC},
+      </if>
+      <if test="upTj != null">
+        UP_TJ = #{upTj,jdbcType=NUMERIC},
+      </if>
+      <if test="upTj2 != null">
+        UP_TJ2 = #{upTj2,jdbcType=NUMERIC},
+      </if>
+      <if test="wqty != null">
+        WQTY = #{wqty,jdbcType=NUMERIC},
+      </if>
+      <if test="cqty != null">
+        CQTY = #{cqty,jdbcType=NUMERIC},
+      </if>
+      <if test="yqty != null">
+        YQTY = #{yqty,jdbcType=NUMERIC},
+      </if>
+
+      <if test="yqty == null">
+        YQTY = YQTY,
+      </if>
+    </set>
+    where IC_ID = #{icId,jdbcType=VARCHAR}
+      and IC_NO = #{icNo,jdbcType=VARCHAR}
+      and ITM = #{itm,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.winwin.picreport.Edto.TfIcZ">
+    update TF_IC_Z
+    set QTY_XS = #{qtyXs,jdbcType=NUMERIC},
+      UP_TJ = #{upTj,jdbcType=NUMERIC},
+      UP_TJ2 = #{upTj2,jdbcType=NUMERIC},
+      WQTY = #{wqty,jdbcType=NUMERIC},
+      CQTY = #{cqty,jdbcType=NUMERIC},
+      YQTY = #{yqty,jdbcType=NUMERIC}
+    where IC_ID = #{icId,jdbcType=VARCHAR}
+      and IC_NO = #{icNo,jdbcType=VARCHAR}
+      and ITM = #{itm,jdbcType=INTEGER}
+  </update>
+</mapper>

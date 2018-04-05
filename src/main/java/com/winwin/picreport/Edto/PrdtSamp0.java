@@ -1,7 +1,7 @@
 package com.winwin.picreport.Edto;
 import com.winwin.picreport.AllConstant.Cnst;
 import com.winwin.picreport.AllConstant.Constant.ConstantInit;
-import com.winwin.picreport.Bcontroller.daYang.dto.AlterPriceRecToFront;
+//import com.winwin.picreport.Bcontroller.daYang.dto.AlterPriceRecToFront;
 import com.winwin.picreport.Futils.hanhan.p;
 
 import java.text.SimpleDateFormat;
@@ -11,7 +11,7 @@ import java.util.Date;
 import java.util.List;
 
 //PrdtSamp是原汁原味的自动生成的,  PrdtSamp0是添加的功能
-public class PrdtSamp0 extends PrdtSamp{
+public class PrdtSamp0 extends PrdtSamp {
     private String usr;//登录的会员名不再用了,因为我在PrdtSamp里已经有了UserName(用户名)和tenantId了
     //价格列表,采购和销售合并//其实后来弄成单独销售的了
     private List<UpDefMy01>upDefMyList=new ArrayList<>();
@@ -20,10 +20,10 @@ public class PrdtSamp0 extends PrdtSamp{
     private List<UpDefMy01>upDefMyListBuy=new ArrayList<>();
  /////////////////////////////////////////////////////////////////////////////////
     //销售价格修改模块
- List<AlterPriceRecToFront>saleAlterRecList=new ArrayList();
+// List<AlterPriceRecToFront>saleAlterRecList=new ArrayList();
 
     //采购价格修改模块
-    private List<AlterPriceRecToFront>buyAlterRecList=new ArrayList();
+//    private List<AlterPriceRecToFront>buyAlterRecList=new ArrayList();
 ///////////////////////////////////////////////////////////////////////////////////////
     protected String sampMakeStamp;//打样时间戳//传给我这个
     protected String sampSendStamp;//样品寄出时间戳//传给我这个
@@ -273,21 +273,21 @@ public class PrdtSamp0 extends PrdtSamp{
         return this;
     }
 
-    public List<AlterPriceRecToFront> getSaleAlterRecList() {
-        return saleAlterRecList;
-    }
 
-    public PrdtSamp0 setSaleAlterRecList(List<AlterPriceRecToFront> saleAlterRecList) {
-        this.saleAlterRecList = saleAlterRecList;
-        return this;
-    }
-
-    public List<AlterPriceRecToFront> getBuyAlterRecList() {
-        return buyAlterRecList;
-    }
-
-    public PrdtSamp0 setBuyAlterRecList(List<AlterPriceRecToFront> buyAlterRecList) {
-        this.buyAlterRecList = buyAlterRecList;
-        return this;
-    }
+    //    public List<AlterPriceRecToFront> getSaleAlterRecList() {
+//        return saleAlterRecList;
+//    }
+//
+//    public PrdtSamp0 setSaleAlterRecList(List<AlterPriceRecToFront> saleAlterRecList) {
+//        this.saleAlterRecList = saleAlterRecList;
+//        return this;
+//    }
+//    public List<AlterPriceRecToFront> getBuyAlterRecList() {
+//        return buyAlterRecList;
+//    }
+//
+//    public PrdtSamp0 setBuyAlterRecList(List<AlterPriceRecToFront> buyAlterRecList) {
+//        this.buyAlterRecList = buyAlterRecList;
+//        return this;
+//    }
 }

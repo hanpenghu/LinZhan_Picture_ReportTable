@@ -1,9 +1,8 @@
 package com.winwin.picreport.Ddao.reportxmlmapper;
-import com.winwin.picreport.Bcontroller.PicSearchPic.dto.SimplePrdtSamp;
-import com.winwin.picreport.Bcontroller.daYang.dto.AlterPrice;
-import com.winwin.picreport.Bcontroller.daYang.dto.AlterPriceRecToFront;
+
 import com.winwin.picreport.Bcontroller.loginRegistModul.auth.dto.Model;
 import com.winwin.picreport.Bcontroller.loginRegistModul.auth.dto.ModelUsers;
+import com.winwin.picreport.Bcontroller.shouHuoQueRen.Detail;
 import com.winwin.picreport.Edto.*;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Param;
@@ -152,8 +151,7 @@ public interface A001TongYongMapper {
 
 
 
-   List<PrdtSamp0> chanPinBianMaJianDangTiaoJianChaXun(PrdtSamp1 p1);
-   Integer getCountOfDuoTiaoJianChaXunZongJiLuShu(PrdtSamp1 p1);
+
 
    @Select("Select top 1 prd_no from prdt where name=#{prdCode} order by prd_no desc")
    String selectTop1PrdtNo(@Param("prdCode") String prdCode);
@@ -245,27 +243,10 @@ public interface A001TongYongMapper {
             " where a.idx_no=#{idxNo} and a.idx_up=b.idx_no")
     Map<String,String> getFenLeiNoFromIndx(@Param("idxNo") String idxNo);
    //////////////价格修改模块////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-   @Update({"update up_def set  " +
-           "cur_id =#{curIdAfter}," +
-           "qty=#{qtyAfter}, " +
-           "up=#{upAfter}," +
-           "hj_no=#{unitAfter}," +
-           "rem =#{remFrontAfter} " +
-           "  where #{dingJiaZhuJian}=isnull(oleField,'')+isnull(bil_Type,'')+isnull(cur_id,'')"})
-   Integer updateUpdef(AlterPrice alterPrice);
 
 
 
-//   @Insert({"insert into alter_price_rec(ding_Jia_Guan_Lian,user_Name,tenant_Id" +
-//           ",alter_Time,prdt_Code,prdt_Samp_Uuid,qty_Before" +
-//           ",qty_After,up_Before,up_After,unit_Before,unit_After" +
-//           ",rem_Front_Before,rem_Front_After,bil_Type" +
-//           ",cur_Id_Before,cur_Id_After)values" +
-//           "(#{dingJiaGuanLian},#{userName},#{tenantId},#{alterTime}" +
-//           ",#{prdtCode},#{prdtSampUuid},#{qtyBefore}" +
-//           ",#{qtyAfter},#{upBefore},#{upAfter},#{unitBefore},#{unitAfter}" +
-//           ",#{remFrontBefore},#{remFrontAfter},#{bilType},#{curIdBefore},#{curIdAfter})"})
-//   Integer insertAlterPriceRec(AlterPrice alterPrice);
+
    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
@@ -295,15 +276,8 @@ public interface A001TongYongMapper {
    @Select({"select top 1 isnull(model_uuid,'') as modelUuid,isnull(model_name,'') as modelName,isnull(rem,'') as rem from model_auth where model_uuid=#{modelUuid}"})
    Model getModels(@Param("modelUuid")String modelUuid);
    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-   //图片搜索模块的根据图片afterUrl得到打样的简单信息
-   @Select({" select prd_code as prdtCode,idx_name as prdtName from prdt_samp   where thum like #{urlAfter}"})
-    List<SimplePrdtSamp> getSimplePrdtSamps(@Param("urlAfter") String urlAfter);
 
    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-   //定价修改记录修改内容模块
-   @Select({"SELECT top 20  have_Trans_Up_Other_After as haveTransUpOtherAfter,have_Trans_Up_Other_Before as haveTransUpOtherBefore,have_Trans_Up_My_After as haveTransUpMyAfter,have_Trans_Up_My_Before as haveTransUpMyBefore,no_Trans_Up_Other_After as noTransUpOtherAfter,no_Trans_Up_Other_Before as noTransUpOtherBefore,no_Trans_Up_My_After as noTransUpMyAfter,no_Trans_Up_My_Before as noTransUpMyBefore, ding_jia_guan_lian as dingJiaGuanLian,USER_NAME as userName,tenant_id as tenantId,alter_time as alterTime,prdt_code as prdtCode,prdt_samp_uuid as prdtSampUuid,qty_before as qtyBefore,qty_after as qtyAfter,up_before as upBefore,up_after as upAfter,unit_before as unitBefore,unit_after as unitAfter,rem_front_before as remFrontBefore,rem_front_after as remfrontAfter,bil_type as bilType,cur_id_before as curIdBefore,cur_id_after as curIdAfter,sale_or_buy as saleOrBuy from alter_price_rec where prdt_samp_uuid=#{prdtSampUuid} and sale_or_buy=#{saleOrBuy} order by alter_time desc"})
-   List<AlterPriceRecToFront> selectTop20AlterPriceRec(@Param("prdtSampUuid") String prdtSampUuid, @Param("saleOrBuy") String saleOrBuy);
 
 
     /////////////////////////////////////////////////////////////////////////////////////////////
@@ -313,4 +287,7 @@ public interface A001TongYongMapper {
 
    @Select({"update prdt set ut=#{mainUnit} where prd_no=#{prdtNo}"})
    int updateUtToPrdtUsePrdNo(@Param("prdtNo") String prdtNo,@Param("mainUnit")  String mainUnit);
+
+
+    List<Detail> getShouHuoMingXiOfYunRui(@Param("osNo") String osNo);
 }

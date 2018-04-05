@@ -19,8 +19,8 @@
         </jdbcConnection>-->
 
          <jdbcConnection driverClass="com.microsoft.sqlserver.jdbc.SQLServerDriver"
-                       connectionURL="jdbc:sqlserver://127.0.0.1:1433;DatabaseName=db_lz17" userId="sa"
-                       password="root">
+                       connectionURL="jdbc:sqlserver://47.96.166.98:7803;DatabaseName=DB_8" userId="sa"
+                       password="c7k9r5H2w8+!@wuyishan">
        </jdbcConnection>
 
 <!--        <jdbcConnection driverClass="com.microsoft.sqlserver.jdbc.SQLServerDriver"
@@ -79,7 +79,7 @@
         	enableSelectByExample="false"
         ></table> -->
         <!--dept cust salm my_wh-->
-        <table tableName="sapso999999"></table><!--产品打样表 -->
+        <table tableName="mf_ic_z111"></table><!--产品打样表 -->
        <!-- <table tableName="up_def"></table>--><!-- 单价表-->
        <!-- <table tableName="cur_id"></table>--><!--币别表 -->
       	<!-- <table tableName="before_same_prdNo_merge"></table>-->

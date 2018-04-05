@@ -1,10 +1,88 @@
 <!DOCTYPE html>
-<html lang="zh">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <script src="jquery-3.2.1.min.js"></script>
 </head>
 <body>
-<img src="1.jpg" height="800" width="1280"/>
+<button id="A1" style="height: 100px;width: 100px" >
+    点击生成accessToken
+</button>
+
+<button id="A2" style="height: 100px;width: 100px" >
+    点击生成jsTacket
+</button>
+<button id="A3" style="height: 100px;width: 100px" >
+    点击根据menu.json生成新的菜单
+</button>
+<script type="text/javascript">
+    var ip="http://127.0.0.1:8080/"
+//    var ip="http://hanpenghu123.picp.io/"//测试跨域
+    $("#A1").click(function () {//点击按钮后先alert，再发送ajax
+//        alert("测试");
+//        var saveData={cangKuNum:"0000",jingBanRenNum:""}
+        $.ajax({
+            url : ip+"gAccessToken",
+            type : "POST",
+            //data : '{"cangKuNum":"123","jingBanRenNum":"321"}',//可用
+//            data:JSON.stringify(saveData),//和上面一行都可用//传递过去的内容
+//            dataType : "json",//传递过去的格式
+//            contentType : "application/json;charset=utf-8",//返回的内容
+            success:function(d){
+                //注意得到的d其实是一个js格式JSON对象
+                alert(d);//讲json对象序列化(字符串)输出
+//                alert( "Data Saved: " + d[0]["osDd"]);//拿到js的json对象的数组中的第0个对象的key是osDd的value
+            }
+        });
+
+            this.disabled=true;
+
+    })
+
+    $("#A2").click(function () {//点击按钮后先alert，再发送ajax
+    //        alert("测试");
+    //    var saveData={cangKuNum:"0000",jingBanRenNum:""}
+        $.ajax({
+            url : ip+"gJsTicket",
+            type : "POST",
+            //data : '{"cangKuNum":"123","jingBanRenNum":"321"}',//可用
+    //            data:JSON.stringify(saveData),//和上面一行都可用//传递过去的内容
+    //            dataType : "json",//传递过去的格式
+    //        contentType : "application/json;charset=utf-8",//返回的内容
+            success:function(d){
+                //注意得到的d其实是一个js格式JSON对象
+                alert(d);//讲json对象序列化(字符串)输出
+    //                alert( "Data Saved: " + d[0]["osDd"]);//拿到js的json对象的数组中的第0个对象的key是osDd的value
+            }
+        });
+
+        this.disabled=true;
+
+    })
+
+
+
+    $("#A3").click(function () {//点击按钮后先alert，再发送ajax
+        //        alert("测试");
+        //    var saveData={cangKuNum:"0000",jingBanRenNum:""}
+        $.ajax({
+            url : ip+"gMenu",
+            type : "POST",
+            //data : '{"cangKuNum":"123","jingBanRenNum":"321"}',//可用
+            //            data:JSON.stringify(saveData),//和上面一行都可用//传递过去的内容
+            //            dataType : "json",//传递过去的格式
+            //        contentType : "application/json;charset=utf-8",//返回的内容
+            success:function(d){
+                //注意得到的d其实是一个js格式JSON对象
+                alert(d);//讲json对象序列化(字符串)输出
+                //                alert( "Data Saved: " + d[0]["osDd"]);//拿到js的json对象的数组中的第0个对象的key是osDd的value
+            }
+        });
+
+        this.disabled=true;
+
+    })
+</script>
 </body>
 </html>

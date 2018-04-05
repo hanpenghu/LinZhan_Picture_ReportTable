@@ -22,7 +22,15 @@ import java.util.stream.Collectors;
 
 public strictfp class p {
 
-
+    /**
+     *对于打包后的springboot项目
+     * 我们怎么读取资源路径？
+     * 其实很简单
+     * 所有  资源文件放到跟jar包同级目录  然后用
+     * String pa = p.readAllTxt("资源文件.txt")
+     * 在项目中就能读取
+     *
+     * */
     /*public static void main(String[]args){
             p.p(p.gp().sad(p.dexhx).sad("年后").sad(p.dexhx).gad());
     }*/
@@ -39,6 +47,18 @@ public strictfp class p {
     private final static String emailPattern2 =
             "^\\w+([-+.]\\w+)*@\\w+([-.]\\w+)*\\.\\w+([-.]\\w+)*$";
 
+
+
+
+    public static final String UTF8="UTF-8";
+    public static final String GBK="GBK";
+    public static final String GB2312="GB2312";
+
+    public static final String xg="/";//斜杠
+    public static final String jpeg=".jpeg";
+    public static final String jpg="jpg";
+    public static final String noExceptionSign ="《没有异常》";
+    public static final String unKnownExceptionSign ="《未知异常》";
     public static final String knownExceptionSign ="《已知异常》";
     public static final String gq="_____________________RuanJianGuoQi__________________________The software has expired, please contact the supplier_____________________RuanJianGuoQi__________________________";//过期提醒
     public static final String NULL1="NULL";
@@ -46,6 +66,7 @@ public strictfp class p {
     public static final String excel="excel";
     public static final String zhifgf="~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~";//至分隔符
     public static final String zhi="~";//至符号
+    public static final String zuHeFenGeFu="{~}";//组合分隔符,常用于分隔各种字符串组合
     public static final String dexhx="_________________";//短英文下划线
     public static final String cexhx="____________________________________________";//长英文下划线
     public static final String dzwxhx="————————————————";//短中文下划线
@@ -182,6 +203,86 @@ public strictfp class p {
     /*public static void main(String[]args){
          p.p(p.gp().sad(p.dexhx).sad(p.uuid()).sad(p.dexhx).gad());
     }*/
+
+
+
+
+
+
+
+    /**
+     *按顺序拆分带组合分隔符的字符串
+     * 适用于
+     *
+     * 阿拉山口打飞{~}机爱丽丝打飞{~}机埃里克的{~}
+     *
+     * 这种
+     * 最后还带分隔符的组合
+     * 截取后是
+     * [阿拉山口打飞, 机爱丽丝打飞, 机埃里克的]
+     * */
+    public static List<String>chaiFenZuHeFenGeFu(String s){
+        List<String>list=new LinkedList<>();
+        while(s.contains(zuHeFenGeFu)){
+            //就是按照{~}拆分
+            String ss = s.substring(0, s.indexOf(zuHeFenGeFu));
+            list.add(ss);
+            s=s.substring(s.indexOf(zuHeFenGeFu)+3);
+        }
+
+        return list;
+    }
+
+
+    /**
+     ** 适用于
+     *
+     * 阿拉山口打飞{~}机爱丽丝打飞{~}机埃里克的
+     *
+     * 这种最后没有分隔符的组合
+     * 截取后是
+     * [阿拉山口打飞, 机爱丽丝打飞, 机埃里克的]
+     * */
+    public static List<String>chaiFenZuHeFenGeFu0(String s){
+        return chaiFenZuHeFenGeFu(s+zuHeFenGeFu);
+
+    }
+
+
+    /**
+     *自定义组合符号的拆分
+     * 用于字符串最后有分隔符的
+     * 阿拉山口打飞{~}机爱丽丝打飞{~}机埃里克的{~}
+     * */
+    public static List<String>chaiFenZuHeFenGeFu(String s,String zuHeFenGeFuHao,int zuHeFuHaoChangDu){
+        List<String>list=new LinkedList<>();
+        while(s.contains(zuHeFenGeFuHao)){
+            //就是按照{~}拆分
+            String ss = s.substring(0, s.indexOf(zuHeFenGeFuHao));
+            list.add(ss);
+            s=s.substring(s.indexOf(zuHeFenGeFuHao)+zuHeFuHaoChangDu);
+        }
+
+        return list;
+    }
+
+    /**
+     *用于字符串最后没有分隔符的
+     * 阿拉山口打飞{~}机爱丽丝打飞{~}机埃里克的
+     * 根据  ~  拆完是
+     * [阿拉山口打飞{, }机爱丽丝打飞{, }机埃里克的]
+     * */
+    public static List<String>chaiFenZuHeFenGeFu0(String s,String zuHeFenGeFuHao,int zuHeFuHaoChangDu){
+        return chaiFenZuHeFenGeFu(s+zuHeFenGeFuHao,zuHeFenGeFuHao,zuHeFuHaoChangDu);
+
+    }
+
+//    public static void main(String[]args){
+//            String s="阿拉山口打飞{~}机爱丽丝打飞{~}机埃里克的";
+//        p.p("-------------------------------------------------------");
+//        p.p(chaiFenZuHeFenGeFu0(s,"~",1));
+//        p.p("-------------------------------------------------------");
+//    }
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -1633,6 +1734,9 @@ public static Object StringTypeSpace2Null(Object o) throws IllegalAccessExceptio
 //        p.p(p.gp().sad(p.dexhx).sad(p.strValeOfNullSpace(isInteger(null))).sad(p.dexhx).gad());
 //    }
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
     /**
      *将字符串写入文本,注意会覆盖原来的文本内容
      * 注意,这个写入文件,如果文件不存在,会自动创建并写入,但是文件 路径中的文件夹必须存在
@@ -1652,12 +1756,27 @@ public static Object StringTypeSpace2Null(Object o) throws IllegalAccessExceptio
         return true;
     }
 
-    public static void main(String[]args){
-        boolean b = writeToTxt("[\"1\",\"2\"]", "C:/123");
-        System.out.println(b);
-    }
+//    public static void main(String[]args){
+//        boolean b = writeToTxt("[\"1\",\"2\"]", "C:/123");
+//        System.out.println(b);
+//    }
+
+
+    //String pa = p.readAllTxt("新建文本文档.bat")
+
+    /**
+     *对于打包后的springboot项目
+     * 我们怎么读取资源路径？
+     * 其实很简单
+     * 所有  资源文件放到跟jar包同级目录  然后用
+     * String pa = p.readAllTxt("资源文件.txt")
+     * 在项目中就能读取
+     *
+     * */
+
     /**
      *读文本的所有内容变为字符串
+     * 这个传入的路径必须是绝对路径
      * */
     public static String readAllTxt(String txtPath){
         File file=null; FileReader fr=null;BufferedReader br=null;
@@ -1683,6 +1802,30 @@ public static Object StringTypeSpace2Null(Object o) throws IllegalAccessExceptio
         }
     }
 
+
+    public static String readAllTxt(File file){
+
+         FileReader fr=null;BufferedReader br=null;
+        try {
+            fr=new FileReader(file);
+            br=new BufferedReader(fr);
+            StringBuffer sb=new StringBuffer();
+            String str="";
+            while((str=br.readLine())!=null){
+                sb.append(str);
+            }
+            return sb.toString().trim();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }finally{
+            try {
+                fr.close();
+                br.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
 //    public static void main(String[]args){
 //         p.p(p.gp().sad(p.dexhx).sad(readAllTxt("E:\\1\\新建文本文档.txt")).sad(p.dexhx).gad());
 //
@@ -1718,6 +1861,101 @@ public static Object StringTypeSpace2Null(Object o) throws IllegalAccessExceptio
 //       String path="E:/";
         return path;
     }
+
+
+
+    private static final int PROTECTED_LENGTH = 51200;// 输入流保护 50KB
+
+    public static String readInputToString(InputStream input,String charSet){
+
+        if (input == null) {
+            throwE("----InputStream is  null----");
+        }
+        //字节数组
+        byte[] bcache = new byte[2048];
+        int readSize = 0;//每次读取的字节长度
+        int totalSize = 0;//总字节长度
+        ByteArrayOutputStream infoStream = new ByteArrayOutputStream();
+        try {
+            //一次性读取2048字节
+            while ((readSize = input.read(bcache)) > 0) {
+                totalSize += readSize;
+                if (totalSize > PROTECTED_LENGTH) {
+                    throwE("---InputStream more than 50KB-----");
+                }
+                //将bcache中读取的input数据写入infoStream
+                infoStream.write(bcache,0,readSize);
+            }
+        } catch (IOException e1) {
+            throwE("---read inputStream Exception--");
+        } finally {
+            try {
+                //输入流关闭
+                input.close();
+            } catch (IOException e) {
+                throwE("-----inputStream close Exception----");
+            }
+        }
+
+        try {
+            return infoStream.toString(charSet);
+        } catch (UnsupportedEncodingException e) {
+            throwE("---return String Exception---");
+        }
+
+        return "";
+
+
+    }
+
+
+    /**
+     *读当前类所在目录下面的文件
+     *
+     * 在有的项目行有的不行
+     * */
+
+
+    public static String duDangQianLeiMuLuXiaDeWenJian(String wenJianMing,Class dangQianLeiClazz,String charSetOfTxt){
+        try {
+            InputStream resourceAsStream = dangQianLeiClazz.getResourceAsStream(wenJianMing);
+
+
+            return readInputToString(resourceAsStream,charSetOfTxt);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "";
+        }
+
+    }
+
+
+
+
+    /**
+     *java读取资源文件
+     * 读取properties文件
+     * 读取properties资源文件
+     * 资源读取不到返回null
+     * 注意   pr.getProperty("key");可以直接拿到 文件里面的东西
+     * */
+
+
+    public static Properties readProp(String propertiesPath){
+        Properties pr=new Properties();
+        try {
+            pr.load(new FileReader(propertiesPath));
+        } catch (IOException e) {
+            e.printStackTrace();
+            //有异常的话,返回一个null;
+            return null;
+        }
+//        pr.getProperty("key");
+        return pr;
+    }
+
+
+
 
 
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1933,6 +2171,25 @@ public static Object StringTypeSpace2Null(Object o) throws IllegalAccessExceptio
         }
     }
 
+    /**
+     *根据list排序参数
+     * 字典排序
+     * */
+    //排序后不拼接字符串
+    public static List<String> ziDianPaiXu(List<String> weiPaiXuDeZiFuChuanJiHe){
+        Collections.sort(weiPaiXuDeZiFuChuanJiHe);
+        return weiPaiXuDeZiFuChuanJiHe;
+    }
+
+    //排序后再拼接字符串
+    public static String ziDianPaiXuBingPinJie(List<String> weiPaiXuDeZiFuChuanJiHe){
+        Collections.sort(weiPaiXuDeZiFuChuanJiHe);
+        StringBuilder sb=new StringBuilder();
+        for(String s:weiPaiXuDeZiFuChuanJiHe){
+            sb.append(s);
+        }
+        return sb.toString();
+    }
 
 
 //    public static void main(String[]args){
@@ -1946,6 +2203,44 @@ public static Object StringTypeSpace2Null(Object o) throws IllegalAccessExceptio
 //    public static void main(String[]args){
 //            p(new BigDecimal("0.10000"));
 //    }
+
+
+
+
+
+    /**
+     *  这种玩意对于导包jar的java启动文件有灾难性的后果,因为jar里面的路径从外面一直读是读不进去的
+     *通过当前类 得到工程根目录,根路径  就是得到src路径
+     * E:/1/work_space/luxclub_jeesite/out/production/luxclub_jeesite/
+     * */
+
+    public static String srcPath(){
+        //得到的很可能是这种路径
+        //          /E:/1/work_space/luxclub_jeesite/out/production/luxclub_jeesite/
+        String s= p.class.getResource("/").getPath();
+        if(p.dy("/",s.substring(0,1))){
+            //得到这种  类所在的文件夹
+            //           E:/1/work_space/luxclub_jeesite/out/production/luxclub_jeesite/
+            s=s.substring(1);
+        }
+        return s;
+    }
+
+
+    //    /E:/1/work_space/luxclub_jeesite/out/production/luxclub_jeesite/  这种
+
+
+    /**
+     /E:/1/work_space/CloudPlatformMobile002/target/classes/
+     这种最前面带/的路径,  跟不带一样  但是这种路径对于打包的springboot来讲,是灾难的
+     因为打包后,就无法深入到jar文件内部去读取了
+     * */
+    public static String srcPathYuan(){
+        //得到的很可能是这种路径
+        //          /E:/1/work_space/luxclub_jeesite/out/production/luxclub_jeesite/
+        String s= p.class.getResource("/").getPath();
+        return s;
+    }
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     public	final	static	int	n0	=	0	;
     public	final	static	int	n1	=	1	;

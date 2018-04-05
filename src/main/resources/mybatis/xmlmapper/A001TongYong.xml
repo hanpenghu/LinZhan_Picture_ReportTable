@@ -283,7 +283,22 @@
 
 
 
+    <!--getShouHuoMingXiOfYunRui-->
 
+
+    <select id="getShouHuoMingXiOfYunRui" resultType="com.winwin.picreport.Bcontroller.shouHuoQueRen.Detail">
+        select
+        isnull(a.ic_no,'') as icNo---单号
+        ,isnull(a.cus_no2,'') as cusNo2----客户号
+        ,isnull(b.NAME,'') as name----客户名字
+        ,isnull(c.prd_name,'') as prdName---商品名称
+        ,convert( varchar(23), Convert( decimal(18,3), isnull(c.qty,0))  ) as qty ----商品数量
+        from
+        mf_ic a
+        LEFT JOIN tf_ic c on c.ic_no=a.ic_no
+        left JOIN  CUST b on a.cus_no2=b.CUS_NO
+        where a.ic_no=#{osNo}
+    </select>
 
 
 
