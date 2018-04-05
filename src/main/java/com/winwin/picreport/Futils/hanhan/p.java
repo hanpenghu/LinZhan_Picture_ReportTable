@@ -1398,6 +1398,7 @@ public static Object StringTypeSpace2Null(Object o) throws IllegalAccessExceptio
     public static boolean empty(Object ob){
 
         if(notEmpty(ob)){
+
             return false;
         }else{
             return true;
